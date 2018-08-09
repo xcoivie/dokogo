@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { MenuController, NavController, Slides } from 'ionic-angular';
+import { RestApiProvider } from '../../providers/rest-api/rest-api';
 
 //import { Storage } from '@ionic/storage';
 
@@ -10,6 +10,11 @@ import { MenuController, NavController, Slides } from 'ionic-angular';
 })
 
 export class PlanningPage {
+    countries: string[];
+    errorMessage: string;
+    descending: boolean = false;
+    order: number;
+    column: string = 'name';
     showSkip = true;
 
     @ViewChild('slides') slides: Slides;
@@ -17,8 +22,15 @@ export class PlanningPage {
     constructor(
         public navCtrl: NavController,
         public menu: MenuController,
-        //public storage: Storage
+        public rest: RestApiProvider
+        // public storage: Storage
     ) { }
+
+    sort(){
+         this.descending = !this.descending;
+         this.order = this.descending ? 1 : -1;
+    }
+      
 
     startApp() {
         // this.navCtrl.push(TabsPage).then(() => {
@@ -44,4 +56,21 @@ export class PlanningPage {
         this.menu.enable(true);
     }
 
+    ionViewDidLoad() {
+        this.getCountries();
+      }
+      
+
+    getCountries() {
+        this.rest.getCountries()
+           .subscribe(
+             countries => this.countries = countries,
+             error =>  this.errorMessage = <any>error);
+      }
+
+    public open(event, c) {
+    event.stopPropagation();
+    alert('Open ' + c);
+    }
+    
 }

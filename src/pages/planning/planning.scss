@@ -33,4 +33,10 @@ page-planning {
       color: #000000;
     }
   }
+
+  .my-ion-list {
+    max-height: 100px;
+    overflow-y: scroll;
+  }
+
 }

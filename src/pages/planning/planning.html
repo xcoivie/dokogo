@@ -7,32 +7,54 @@
 </ion-header>
 
 <ion-content no-bounce>
-    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+        <!-- <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+        <button ion-button type="button" (click)="sort()">Sort</button>
+        <ion-list>
+          <ion-item *ngFor="let c of countries | search : terms | sort: {property: column, order: order}">
+            <ion-avatar item-left>
+              <img src="{{c.flag}}">
+            </ion-avatar>
+            <h2>{{c.name}}</h2>
+            <p>Capital: {{c.capital}}, Region: {{c.region}}</p>
+          </ion-item>
+        </ion-list> -->
 
-        <ion-slide>
-            <h2 class="slide-title">
-                Location
-            </h2>
-            <ion-item>
-                <ion-input required type="text" placeholder="First Name"></ion-input>
-            </ion-item>
-        </ion-slide>
+    <ion-slides 
+        #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager 
+        style="height:initial"
+    >
 
-        <ion-slide>
-            <h2 class="slide-title">Time</h2>
-        </ion-slide>
-
-        <ion-slide>
-            <h2 class="slide-title">Budget</h2>
-        </ion-slide>
-
-        <ion-slide>
-            <h2 class="slide-title">Hotel</h2>
-            <button ion-button icon-end large clear (click)="startApp()">
-                Continue
-                <ion-icon name="arrow-forward"></ion-icon>
-            </button>
-        </ion-slide>
-
+            <ion-slide >
+                <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+                <button ion-button type="button" (click)="sort()">Sort</button>  
+                <ion-list sliding="false" class="my-ion-list">
+                    <ion-item 
+                        *ngFor="let c of countries | search : terms | sort: {property: column, order: order}" 
+                        (click)="open($event, c)">
+                    <ion-avatar item-left>
+                        <img src="{{c.flag}}">
+                    </ion-avatar>
+                    <h2>{{c.name}}</h2>
+                    <p>Capital: {{c.capital}}, Region: {{c.region}}</p>
+                    </ion-item>
+                </ion-list>      
+            </ion-slide>
+    
+            <ion-slide>
+                <h2 class="slide-title">Time</h2>
+            </ion-slide>
+    
+            <ion-slide>
+                <h2 class="slide-title">Budget</h2>
+            </ion-slide>
+    
+            <ion-slide>
+                <h2 class="slide-title">Hotel</h2>
+                <button ion-button icon-end large clear (click)="startApp()">
+                    Continue
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-slide>
     </ion-slides>
+        
 </ion-content>

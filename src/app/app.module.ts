@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -16,6 +17,9 @@ import { HubPage } from '../pages/hub/hub';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { RestApiProvider } from '../providers/rest-api/rest-api';
+import { SearchPipe } from '../pipes/search/search';
+import { SortPipe } from '../pipes/sort/sort';
 
 
 @NgModule({
@@ -25,11 +29,14 @@ import { UserData } from '../providers/user-data';
         PlanningPage,
         TimelinePage,
         PaymentPage,
-        HubPage
+        HubPage,
+        SearchPipe,
+        SortPipe
     ],
     imports: [
         BrowserModule,
         HttpModule,
+        HttpClientModule,
         IonicModule.forRoot(MyApp, {
             iconMode: 'md',
             modalEnter: 'modal-slide-in',
@@ -54,6 +61,7 @@ import { UserData } from '../providers/user-data';
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         ConferenceData,
         UserData,
+    RestApiProvider,
     ]
 })
 export class AppModule { }
