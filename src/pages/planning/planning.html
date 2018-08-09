@@ -1,0 +1,38 @@
+<ion-header no-border>
+    <ion-navbar>
+        <ion-buttons end *ngIf="showSkip">
+            <button ion-button (click)="startApp()" color="primary">Skip</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+        <ion-slide>
+            <h2 class="slide-title">
+                Location
+            </h2>
+            <ion-item>
+                <ion-input required type="text" placeholder="First Name"></ion-input>
+            </ion-item>
+        </ion-slide>
+
+        <ion-slide>
+            <h2 class="slide-title">Time</h2>
+        </ion-slide>
+
+        <ion-slide>
+            <h2 class="slide-title">Budget</h2>
+        </ion-slide>
+
+        <ion-slide>
+            <h2 class="slide-title">Hotel</h2>
+            <button ion-button icon-end large clear (click)="startApp()">
+                Continue
+                <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+        </ion-slide>
+
+    </ion-slides>
+</ion-content>
